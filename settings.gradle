@@ -1,0 +1,3 @@
+rootProject.name = 'microservices-gtmr'
+include 'game-service'
+

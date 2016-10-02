@@ -1,0 +1,4 @@
+game-service:
+  image: game-service
+  ports:
+    - "8080"

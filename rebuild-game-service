@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./gradlew game-service:dB
+docker-compose up -d game-service

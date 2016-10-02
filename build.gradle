@@ -1,0 +1,27 @@
+group 'com.vall'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+
+    task dockerBuild << {
+        exec {
+            commandLine 'docker', 'build', '--force-rm=true', "--tag='${project.name}'", '.'
+        }
+    }
+
+    dockerBuild.dependsOn build
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
