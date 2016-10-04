@@ -2,3 +2,19 @@ game-service:
   image: game-service
   ports:
     - "8080"
+  links:
+    - consul
+  environment:
+    SERVICE_NAME: game-service
+    SERVICE_CHECK_HTTP: /health
+    SPRING_PROFILES_ACTIVE: consul
+
+consul:
+  image: gliderlabs/consul-server:0.5
+  container_name: consul
+  ports:
+    - "8400:8400"
+    - "8500:8500"
+    - "53:8600/udp"
+  command: "-bootstrap -advertise 192.168.99.100 -ui-dir /ui"
+  restart: always

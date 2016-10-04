@@ -1,17 +1,48 @@
 group 'com.vall'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
-apply plugin: 'idea'
+buildscript {
+    repositories {
+//        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:2.2.+'
+    }
+}
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+allprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'provided-base'
+
+
+    repositories {
+//        mavenCentral()
+        jcenter()
+    }
 }
 
 subprojects {
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'spring-boot'
+
+    jar {
+        archiveName = project.name + ".jar"
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+
+        compile 'org.springframework.cloud:spring-cloud-starter-consul-all:1.1.0.RELEASE'
+
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+    }
 
     task dockerBuild << {
         exec {
@@ -20,8 +51,10 @@ subprojects {
     }
 
     dockerBuild.dependsOn build
+
+    springBoot {
+        executable = true
+    }
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
+
