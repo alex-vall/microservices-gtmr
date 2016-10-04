@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: game-service
+  cloud:
+    consul:
+      discovery:
+        instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+      host: consul-host
+      port: 8500
+
+
+logging:
+  level.org.springframework.cloud: DEBUG

@@ -1,0 +1,12 @@
+#spring.cloud.consul.discovery.preferIpAddress: true
+#
+#spring.cloud.consul.host: 192.168.99.100
+spring:
+  cloud:
+    consul:
+#      discovery:
+#        prefer-ip-address: true
+#      host: 192.168.99.100
+#      port: 8500
+      host: consul-host
+      port: 8500
