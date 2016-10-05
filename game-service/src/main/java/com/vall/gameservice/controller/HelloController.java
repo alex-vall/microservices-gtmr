@@ -1,4 +1,4 @@
-package com.vall.gameservice;
+package com.vall.gameservice.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
