@@ -1,14 +1,3 @@
-game-service:
-  image: game-service
-  ports:
-    - "8080:8080"
-  links:
-    - consul
-  environment:
-    SERVICE_NAME: game-service
-    SERVICE_CHECK_HTTP: /health
-    SPRING_PROFILES_ACTIVE: consul
-
 consul:
   image: gliderlabs/consul-server:0.5
   container_name: consul
@@ -18,3 +7,28 @@ consul:
     - "53:8600/udp"
   command: "-bootstrap -advertise 192.168.99.100 -ui-dir /ui"
   restart: always
+
+game-service:
+  image: game-service
+  ports:
+    - "8080:8080"
+  links:
+    - consul
+#    - jackpot-service
+  environment:
+    SERVICE_NAME: game-service
+    SERVICE_CHECK_HTTP: /health
+    SPRING_PROFILES_ACTIVE: consul
+
+jackpot-service:
+  image: jackpot-service
+  ports:
+    - "8080"
+  links:
+    - consul
+  environment:
+    SERVICE_NAME: jackpot-service
+    SERVICE_CHECK_HTTP: /health
+    SPRING_PROFILES_ACTIVE: consul
+
+

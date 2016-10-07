@@ -1,6 +1,6 @@
 spring:
   application:
-    name: game-service
+    name: jackpot-service
   cloud:
     consul:
       discovery:
