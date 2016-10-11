@@ -13,9 +13,12 @@ public class GameServiceResult {
 
     private final Double win;
 
-    public GameServiceResult(int status, Double win) {
+    private final Double jackpot;
+
+    public GameServiceResult(int status, Double win, Double jackpot) {
         this.status = status;
         this.win = win;
+        this.jackpot = jackpot;
     }
 
     public int getStatus() {
@@ -24,5 +27,18 @@ public class GameServiceResult {
 
     public Double getWin() {
         return win;
+    }
+
+    public Double getJackpot() {
+        return jackpot;
+    }
+
+    @Override
+    public String toString() {
+        return "GameServiceResult{" +
+                "status=" + status +
+                ", win=" + win +
+                ", jackpot=" + jackpot +
+                '}';
     }
 }

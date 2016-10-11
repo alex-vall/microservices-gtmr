@@ -7,4 +7,9 @@ spring:
         instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 logging:
-  level.org.springframework.cloud: DEBUG
+  level.org.springframework.cloud: INFO
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000

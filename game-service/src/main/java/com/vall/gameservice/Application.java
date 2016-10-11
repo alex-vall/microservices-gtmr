@@ -1,9 +1,15 @@
 package com.vall.gameservice;
 
+import com.vall.gameservice.service.JackpotServiceClient;
+import com.vall.gameservice.service.JackpotServiceClientFallback;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Arrays;
 
@@ -14,6 +20,9 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableFeignClients
+@EnableHystrix
+@ComponentScan(basePackages = "com.vall.gameservice")
 public class Application {
 
     public static void main(String[] args) {
@@ -27,5 +36,12 @@ public class Application {
             System.out.println(beanName);
         }
     }
+
+    @Bean
+    JackpotServiceClientFallback getJackpotServiceClientFallback() {
+        return new JackpotServiceClientFallback();
+    }
+
+
 
 }
